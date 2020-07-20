@@ -2,6 +2,7 @@ package com.fun.uncle.springboot2020.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @Api(tags = "hello 控制层")
+@Slf4j
 public class HelloController {
 
     @GetMapping
     @ApiOperation("Hello Spring Boot 方法")
     public String hello(@RequestParam(value = "name", required = false) String name) {
+        log.info("hello");
         if (StringUtils.isNotBlank(name)) {
             return name + " Hello Spring Boot";
         }
