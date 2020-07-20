@@ -5,6 +5,7 @@ import com.fun.uncle.springboot2020.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,7 +53,7 @@ public class ParamController {
 
     @ApiOperation(value = "@RequestBody")
     @PostMapping("/requestBody")
-    public UserVO requestBody(@RequestBody UserRequest userRequest) {
+    public UserVO requestBody(@RequestBody @Validated UserRequest userRequest) {
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userRequest, userVO);
         return userVO;
