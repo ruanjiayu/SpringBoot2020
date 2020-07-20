@@ -16,6 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <swagger-springfox.version>2.8.0</swagger-springfox.version>
+        <commons-lang3-apache.version>3.5</commons-lang3-apache.version>
     </properties>
 
     <dependencies>
@@ -39,6 +41,26 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+       <!--swagger start-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger-springfox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger-springfox.version}</version>
+        </dependency>
+        <!--swagger end-->
+
+        <!--utils-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3-apache.version}</version>
         </dependency>
     </dependencies>
 
