@@ -1,5 +1,6 @@
 package com.fun.uncle.springboot2020;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 * @Version: 0.0.1-SNAPSHOT
 */
 @SpringBootApplication
+@MapperScan("com.fun.uncle.springboot2020.mapper")
 public class SpringBoot2020Application {
 
     public static void main(String[] args) {

@@ -1,21 +1,24 @@
-package com.fun.uncle.springboot2020.vo;
+package com.fun.uncle.springboot2020.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import lombok.Data;
 
 /**
- * @Description:
- * @Author: Summer
- * @DateTime: 2020/7/20 1:39 下午
- * @Version: 0.0.1-SNAPSHOT
- */
+*
+* @Description:
+* @Author: Summer
+* @DateTime: 2020/7/20 5:32 下午
+* @Version: 0.0.1-SNAPSHOT
+*/
+
+@ApiModel(value="用户信息表")
 @Data
-@ApiModel(value = "用户显示")
-public class UserVO {
+public class UserInfo implements Serializable {
+    private static final long serialVersionUID = 4546587735196981772L;
 
     @ApiModelProperty(value="ID")
     private Integer id;

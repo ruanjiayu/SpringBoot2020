@@ -23,23 +23,23 @@ public class TimeInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        long startTIme = System.currentTimeMillis();
-        threadLocalStart.set(startTIme);
-        log.info("开始时间：{}", startTIme);
+//        long startTIme = System.currentTimeMillis();
+//        threadLocalStart.set(startTIme);
+//        log.info("开始时间：{}", startTIme);
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        long endTIme = System.currentTimeMillis();
-        threadLocalEnd.set(endTIme);
-        log.info("结束时间：{}", endTIme);
+//        long endTIme = System.currentTimeMillis();
+//        threadLocalEnd.set(endTIme);
+//        log.info("结束时间：{}", endTIme);
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        long startTime = threadLocalStart.get();
-        long endTime = threadLocalEnd.get();
-        log.info("接口执行时间：{} 毫秒", endTime - startTime);
+//        long startTime = threadLocalStart.get();
+//        long endTime = threadLocalEnd.get();
+//        log.info("接口执行时间：{} 毫秒", endTime - startTime);
     }
 }
