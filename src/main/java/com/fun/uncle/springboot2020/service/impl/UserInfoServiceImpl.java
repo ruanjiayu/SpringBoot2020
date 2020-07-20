@@ -5,6 +5,7 @@ import com.fun.uncle.springboot2020.mapper.UserInfoMapper;
 import com.fun.uncle.springboot2020.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 
     @Override
+    @Transactional
     public int append(UserInfo userInfo) {
         return userInfoMapper.insert(userInfo);
     }

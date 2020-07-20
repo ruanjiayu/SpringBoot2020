@@ -13,3 +13,7 @@ mybatis:
   type-aliases-package: com.fun.uncle.springboot2020.domain
   mapper-locations: classpath:mapper/*.xml
 
+# 打印指定的目录下的mysql语句，建议使用这个
+logging:
+  level:
+    com.fun.uncle.springboot2020.mapper: DEBUG
