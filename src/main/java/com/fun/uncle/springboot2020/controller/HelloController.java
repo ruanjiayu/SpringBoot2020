@@ -4,6 +4,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,13 +21,22 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class HelloController {
 
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @GetMapping
     @ApiOperation("Hello Spring Boot 方法")
     public String hello(@RequestParam(value = "name", required = false) String name) {
         log.info("hello");
         if (StringUtils.isNotBlank(name)) {
+            stringRedisTemplate.opsForValue().set("hello", name);
             return name + " Hello Spring Boot";
         }
-        return "Hello Spring Boot";
+        name = "徐帆";
+         if (StringUtils.isNotBlank(stringRedisTemplate.opsForValue().get("hello"))) {
+             name = stringRedisTemplate.opsForValue().get("hello");
+         }
+        return   name + "Hello Spring Boot";
     }
 }

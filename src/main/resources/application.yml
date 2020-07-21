@@ -7,6 +7,19 @@ spring:
     password: ruan123456
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
+  redis:
+    host: www.fununcle.top
+    port: 6379
+    timeout: 1000
+
+    password: 123456
+    jedis:
+      pool:
+        max-active: 10 # 最大链接数
+        min-idle: 5 # 最小核心线程
+        max-idle: 10 # 最大线程
+        max-wait: 2000 # 最大等待时间2S
+
 
 #mybatis 相关配置
 mybatis:
@@ -17,3 +30,4 @@ mybatis:
 logging:
   level:
     com.fun.uncle.springboot2020.mapper: DEBUG
+
