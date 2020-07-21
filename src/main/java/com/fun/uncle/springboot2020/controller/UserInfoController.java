@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "userInfo")
 public class UserInfoController {
-
     @Autowired
     private UserInfoService userInfoService;
 
