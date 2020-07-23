@@ -12,4 +12,9 @@ public interface CacheKey {
      * 所有用户的信息
      */
     String USER_INFO_ALL = "user_info_all";
+
+    /**
+     * 测试锁
+     */
+    String TEST_LOCK = "test_lock";
 }
