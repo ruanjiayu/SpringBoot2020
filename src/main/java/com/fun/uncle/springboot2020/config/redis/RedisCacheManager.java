@@ -27,10 +27,8 @@ import java.util.function.Supplier;
  */
 @Component
 @Slf4j
-public class RedisCacheManager {
+public class RedisCacheManager extends RedisBasicOperation{
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 如果redis中存在值，那么直接将其取出，不然就是相应操作后，将其值放入缓存
@@ -79,7 +77,7 @@ public class RedisCacheManager {
 
 
     /**
-     *  如果redis中存在值，那么直接将其取出，不然就是相应操作后，将其值放入缓存
+     *  如果redis中存在值，那么直接将其取出List，不然就是相应操作后，将其值放入缓存
      * @param supplier 对应的操作
      * @param resultClazz 返回的类型
      * @param key 缓存的key
@@ -122,7 +120,7 @@ public class RedisCacheManager {
     }
 
     /**
-     *
+     * 如果redis中存在值，那么直接将其取出Map，不然就是相应操作后，将其值放入缓存
      * @param supplier 对应的操作
      * @param keyType key的类型(基本是String)
      * @param valueType 值的类型
@@ -155,59 +153,16 @@ public class RedisCacheManager {
     }
 
 
-    /**
-     * 获取redis中的值
-     * @param key
-     * @return
-     */
-    public String getString(String key) {
-        try {
-            return key == null ? null : stringRedisTemplate.opsForValue().get(key);
-        } catch (Exception e) {
-            log.error("【redis异常】", e);
-            return null;
-        }
-    }
 
 
     /**
-     * 设置 redis 的值
-     * @param key
-     * @param value
-     * @param time
-     * @param timeUnit
-     * @return
-     */
-    public boolean setString(String key, String value, Long time, TimeUnit timeUnit) {
-        if (StringUtils.isAnyBlank(key, value)) {
-            return false;
-        }
-        try {
-            if (time > 0) {
-                if (TimeUnit.SECONDS == timeUnit) {
-                    // 解决服务雪崩情况
-                    time += RandomUtil.getRandom(60);
-                }
-                stringRedisTemplate.opsForValue().set(key, value, time, timeUnit);
-            } else {
-                stringRedisTemplate.opsForValue().set(key, value);
-            }
-            return true;
-        } catch (Exception e) {
-            log.error("【redis异常】", e);
-            return false;
-        }
-    }
-
-
-    /**
-     *
-     * @param supplier
-     * @param resultClazz
-     * @param key
-     * @param hashKey
-     * @param cacheNull
-     * @param time
+     * 在redis中存储的是hash类型，取数据的时候，取数据时候将其变成List
+     * @param supplier 对应的操作
+     * @param resultClazz 返回的类型
+     * @param key 缓存的key
+     * @param hashKey 缓存的具体hashKey
+     * @param cacheNull 是否存空值
+     * @param time 时间
      * @param <T>
      * @return
      */
@@ -230,50 +185,5 @@ public class RedisCacheManager {
         return JSON.parseArray(value, resultClazz);
     }
 
-
-    public void putHash(String key, String hashKey, String hashValue) {
-        if (StringUtils.isAnyBlank(key, hashKey, hashValue)) {
-            return;
-        }
-        try {
-            stringRedisTemplate.opsForHash().put(key, hashKey, hashValue);
-        } catch (Exception e) {
-            log.error("【redis异常】", e);
-        }
-    }
-
-    public String getHash(String key, String hashKey) {
-        if (StringUtils.isAnyBlank(key, hashKey)) {
-            return null;
-        }
-        try {
-            return (String) stringRedisTemplate.opsForHash().get(key, hashKey);
-        } catch (Exception e) {
-            log.error("【redis异常】", e);
-            return null;
-        }
-    }
-
-    /**
-     * 指定缓存失效时间
-     *
-     * @param key  键
-     * @param time 时间(秒)
-     * @return
-     */
-    public boolean expire(String key, long time) {
-        return expire(key, time, TimeUnit.SECONDS);
-    }
-
-    public boolean expire(String key, long time, TimeUnit timeUnit) {
-        try {
-            if (time > 0) {
-                return stringRedisTemplate.expire(key, time, timeUnit);
-            }
-        } catch (Exception e) {
-            log.error("【redis异常】", e);
-        }
-        return false;
-    }
 
 }
