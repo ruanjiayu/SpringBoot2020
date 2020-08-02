@@ -3,6 +3,7 @@ package com.fun.uncle.springboot2020;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
 *
@@ -13,6 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 */
 @SpringBootApplication
 @MapperScan("com.fun.uncle.springboot2020.mapper")
+@EnableScheduling
 public class SpringBoot2020Application {
 
     public static void main(String[] args) {
