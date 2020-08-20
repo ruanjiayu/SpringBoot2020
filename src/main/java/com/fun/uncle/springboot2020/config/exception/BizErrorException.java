@@ -1,7 +1,6 @@
 package com.fun.uncle.springboot2020.config.exception;
 
 import com.fun.uncle.springboot2020.constant.enums.MessageEnum;
-import com.fun.uncle.springboot2020.vo.CommonResult;
 
 /**
  * @Description:
