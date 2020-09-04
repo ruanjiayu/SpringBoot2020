@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.ws.soap.Addressing;
 import java.util.UUID;
 
 /**
@@ -28,7 +27,7 @@ public class RedisLockController {
     private RedisDistributedLock redisDistributedLock;
 
     @GetMapping("/lock")
-    @ApiOperation(value = "解锁")
+    @ApiOperation(value = "加锁")
     public String lock() {
         String lockKey = CacheKey.TEST_LOCK;
         String requestId = UUID.randomUUID().toString();
@@ -39,12 +38,13 @@ public class RedisLockController {
                 System.out.println(Thread.currentThread().getName() +  "加锁失败, 请稍后");
                 return "加锁失败, 请稍后";
             }
-            Thread.sleep(2000L);
+            Thread.sleep(1000L);
             return "加锁成功";
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
             if (isGetLock) {
+                System.out.println((Thread.currentThread().getName() +  "已经🔓"));
                 redisDistributedLock.releaseLock(lockKey, requestId);
             }
         }
