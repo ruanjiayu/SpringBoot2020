@@ -109,6 +109,15 @@
         </dependency>
         <!--redis 客户端-->
 
+        <!--支付宝相关的-->
+        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>4.10.124.ALL</version>
+        </dependency>
+
+
         <!--utils-->
         <dependency>
             <groupId>org.apache.commons</groupId>
