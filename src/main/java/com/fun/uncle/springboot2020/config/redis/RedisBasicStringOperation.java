@@ -34,8 +34,8 @@ public interface RedisBasicStringOperation {
     /**
      * 设置自增的值
      *
-     * @param key
-     * @param delta
+     * @param key key
+     * @param delta 自增值
      * @return
      */
     Long increment(String key, long delta);
@@ -44,10 +44,20 @@ public interface RedisBasicStringOperation {
     /**
      * 设置自增的值并且设置过期时间
      *
-     * @param key
-     * @param delta
-     * @param time
+     * @param key key
+     * @param delta 自增值
+     * @param time 时间
      * @return
      */
     Long increment(String key, long delta, long time);
+
+    /**
+     * 设置自增的值并且设置过期时间
+     * @param key key
+     * @param delta 自增值
+     * @param time 时间
+     * @param timeUnit 时间单位
+     * @return
+     */
+    Long increment(String key, long delta, long time, TimeUnit timeUnit);
 }

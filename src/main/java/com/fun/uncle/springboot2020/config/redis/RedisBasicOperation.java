@@ -25,11 +25,10 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
-public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicStringOperation, RedisBasicHashOperation, RedisBasicListOperation, RedisBasicSetOperation, RedisBasicZSetOperation{
+public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicStringOperation, RedisBasicHashOperation, RedisBasicListOperation, RedisBasicSetOperation, RedisBasicZSetOperation {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
 
 
     /*key 的相关操作*/
@@ -61,8 +60,6 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
         }
         return null;
     }
-
-
 
 
     @Override
@@ -151,11 +148,16 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
 
     @Override
     public Long increment(String key, long delta, long time) {
+        return this.increment(key, delta, time, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Long increment(String key, long delta, long time, TimeUnit timeUnit) {
         try {
             long num = stringRedisTemplate.opsForValue().increment(key, delta);
             // 兼容异常情况
             if (getExpire(key) < 0) {
-                expire(key, time);
+                expire(key, time, timeUnit);
             }
             return num;
         } catch (Exception e) {
@@ -178,7 +180,6 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
     }
 
 
-
     @Override
     public String getHash(String key, String hashKey) {
         if (StringUtils.isAnyBlank(key, hashKey)) {
@@ -191,7 +192,6 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
             return null;
         }
     }
-
 
 
     /*List 相关操作*/
