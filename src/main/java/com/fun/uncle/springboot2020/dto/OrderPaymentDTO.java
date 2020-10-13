@@ -1,12 +1,14 @@
 package com.fun.uncle.springboot2020.dto;
 
+import com.fun.uncle.springboot2020.dto.base.PaymentDTO;
+
 /**
  * @Description: 订单支付的DTO
  * @Author: Summer
  * @DateTime: 2020/9/8 4:23 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public class OrderPaymentDTO extends BasePaymentDTO{
+public class OrderPaymentDTO extends PaymentDTO {
 
     // 等级
     private Integer level;

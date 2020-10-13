@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.dto;
+package com.fun.uncle.springboot2020.dto.base;
 
 /**
  * @Description: 随机配置
@@ -12,16 +12,6 @@ public class RandomConfigDTO {
      * id
      */
     private Long id;
-
-    /**
-     * 折扣-百分比
-     */
-    private Integer discount;
-
-    /**
-     * 到账金额
-     */
-    private Integer arrivalAmount;
 
     /**
      * 库存:-1代表无库存限制
@@ -41,21 +31,6 @@ public class RandomConfigDTO {
         this.id = id;
     }
 
-    public Integer getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Integer discount) {
-        this.discount = discount;
-    }
-
-    public Integer getArrivalAmount() {
-        return arrivalAmount;
-    }
-
-    public void setArrivalAmount(Integer arrivalAmount) {
-        this.arrivalAmount = arrivalAmount;
-    }
 
     public Integer getStock() {
         return stock;

@@ -1,7 +1,7 @@
 package com.fun.uncle.springboot2020.utils;
 
 import com.fun.uncle.springboot2020.config.redis.RedisCacheManager;
-import com.fun.uncle.springboot2020.dto.RandomConfigDTO;
+import com.fun.uncle.springboot2020.dto.base.RandomConfigDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,17 +31,17 @@ public class LuckyDrawUtil {
      * @param activityPrefix      活动前缀
      * @return
      */
-    public RandomConfigDTO luckyDraw(List<RandomConfigDTO> randomConfigDTOList, RandomConfigDTO defaultConfig, String activityPrefix) {
+    public <T extends RandomConfigDTO> T luckyDraw(List<T> randomConfigDTOList, T defaultConfig, String activityPrefix) {
         LocalDate today = LocalDate.now();
-        Map<String, RandomConfigDTO> randomConfigMap = buildRandomConfigMap(randomConfigDTOList);
+        Map<String, T> randomConfigMap = buildRandomConfigMap(randomConfigDTOList);
         Integer sumWeight = randomConfigDTOList.stream().map(RandomConfigDTO::getWeight).reduce(0, Integer::sum);
         int randomNum = RandomUtil.getRandom(sumWeight) + 1;
         // 初始化相应的配置，尽量减少对应的异常
-        RandomConfigDTO result = defaultConfig;
+        T result = defaultConfig;
 
-        for (Map.Entry<String, RandomConfigDTO> entry : randomConfigMap.entrySet()) {
+        for (Map.Entry<String, T> entry : randomConfigMap.entrySet()) {
             if (inRange(entry.getKey(), randomNum)) {
-                RandomConfigDTO config = entry.getValue();
+                T config = entry.getValue();
                 String grantCountKey = String.format(activityPrefix, config.getId(), today);
                 Long grantCount = redisCacheManager.increment(grantCountKey, 1L, LocalDateTimeUtil.getTimeline(), TimeUnit.MILLISECONDS);
                 // 获取到无限额度的量
@@ -68,11 +68,11 @@ public class LuckyDrawUtil {
      * @param configList 随机配置奖励
      * @return
      */
-    private Map<String, RandomConfigDTO> buildRandomConfigMap(List<RandomConfigDTO> configList) {
-        Map<String, RandomConfigDTO> configMap = new HashMap<>();
+    private <T extends RandomConfigDTO> Map<String, T> buildRandomConfigMap(List<T> configList) {
+        Map<String, T> configMap = new HashMap<>();
         int preSum = 0;
         int curSum;
-        for (RandomConfigDTO config : configList) {
+        for (T config : configList) {
             curSum = config.getWeight() + preSum;
             int minRange = preSum + 1;
             int maxRange = curSum;

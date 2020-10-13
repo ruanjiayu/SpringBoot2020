@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.dto;
+package com.fun.uncle.springboot2020.dto.base;
 
 /**
  * @Description: 基础支付
@@ -6,7 +6,7 @@ package com.fun.uncle.springboot2020.dto;
  * @DateTime: 2020/9/8 4:22 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public class BasePaymentDTO {
+public class PaymentDTO {
 
     // 用户ID
     private Long userId;
