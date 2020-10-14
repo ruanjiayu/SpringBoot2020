@@ -42,4 +42,11 @@ public interface RedisBasicSetOperation {
      */
     Long getSetSize(String key);
 
+    /**
+     * 从set内中随机弹出一个值
+     * @param key
+     * @return
+     */
+    String getSPop(String key);
+
 }

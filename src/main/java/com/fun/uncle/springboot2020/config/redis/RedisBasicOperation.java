@@ -370,6 +370,19 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
         return 0L;
     }
 
+    @Override
+    public String getSPop(String key) {
+        if (Objects.isNull(key)) {
+            return null;
+        }
+        try {
+            return stringRedisTemplate.boundSetOps(key).pop();
+        } catch (Exception e) {
+            log.error("【redis异常】", e);
+        }
+        return null;
+    }
+
     /*ZSet相关操作*/
 
     @Override
