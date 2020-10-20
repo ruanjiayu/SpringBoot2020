@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,56 +26,22 @@ public class LuckyDrawUtil {
 
 
     /**
-     * 返回抽奖的结果(奖金池算法)
+     * 返回抽奖的结果(奖金池算法)借助redis的相关操作
      *
      * @param randomConfigDTOList 随机配置项
      * @param defaultConfig       默认配置项
      * @param activityPrefix      活动前缀
-     * @param randomNum           随机范围值
+     * @param randomNum           随机范围值(null值时为幸运大转盘算法，存在值时候为奖金池算法)
      * @return
      */
-    public <T extends RandomConfigDTO> T luckyDraw(List<T> randomConfigDTOList, T defaultConfig, String activityPrefix, int randomNum) {
+    public <T extends RandomConfigDTO> T luckyDraw(List<T> randomConfigDTOList, T defaultConfig, String activityPrefix, Integer randomNum) {
         LocalDate today = LocalDate.now();
         Map<String, T> randomConfigMap = buildRandomConfigMap(randomConfigDTOList);
-        // 初始化相应的配置，尽量减少对应的异常
-        T result = defaultConfig;
+        if (Objects.isNull(randomNum)) {
+            Integer sumWeight = randomConfigDTOList.stream().map(RandomConfigDTO::getWeight).reduce(0, Integer::sum);
+            randomNum = RandomUtil.getRandom(sumWeight) + 1;
 
-        for (Map.Entry<String, T> entry : randomConfigMap.entrySet()) {
-            if (inRange(entry.getKey(), randomNum)) {
-                T config = entry.getValue();
-                String grantCountKey = String.format(activityPrefix, config.getId(), today);
-                Long grantCount = redisCacheManager.increment(grantCountKey, 1L, LocalDateTimeUtil.getTimeline(), TimeUnit.MILLISECONDS);
-                // 获取到无限额度的量
-                if (config.getStock() == -1) {
-                    result = config;
-                }
-                // 获取到有额度的量
-                else if (grantCount <= config.getStock()) {
-                    result = config;
-                }
-                // 获取到默认的配置
-                else {
-                    result = defaultConfig;
-                }
-            }
         }
-        return result;
-    }
-
-
-    /**
-     * 返回抽奖的结果(幸运大转盘算法)
-     *
-     * @param randomConfigDTOList 随机配置项
-     * @param defaultConfig       默认配置项
-     * @param activityPrefix      活动前缀
-     * @return
-     */
-    public <T extends RandomConfigDTO> T luckyDraw(List<T> randomConfigDTOList, T defaultConfig, String activityPrefix) {
-        LocalDate today = LocalDate.now();
-        Map<String, T> randomConfigMap = buildRandomConfigMap(randomConfigDTOList);
-        Integer sumWeight = randomConfigDTOList.stream().map(RandomConfigDTO::getWeight).reduce(0, Integer::sum);
-        int randomNum = RandomUtil.getRandom(sumWeight) + 1;
         // 初始化相应的配置，尽量减少对应的异常
         T result = defaultConfig;
 
