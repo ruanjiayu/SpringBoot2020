@@ -1,5 +1,6 @@
 package com.fun.uncle.springboot2020.config.redis;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -48,5 +49,12 @@ public interface RedisBasicSetOperation {
      * @return
      */
     String getSPop(String key);
+
+    /**
+     * 使用pipeline批量插入redis的set值
+     * @param key
+     * @param values
+     */
+    void batchInsertSet(String key, List<String> values);
 
 }

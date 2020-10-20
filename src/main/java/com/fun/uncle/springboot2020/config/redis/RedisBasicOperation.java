@@ -4,6 +4,9 @@ import com.fun.uncle.springboot2020.utils.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.core.RedisOperations;
+import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
@@ -381,6 +384,19 @@ public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicSt
             log.error("【redis异常】", e);
         }
         return null;
+    }
+
+    @Override
+    public void batchInsertSet(String key, List<String> values) {
+        stringRedisTemplate.executePipelined(new SessionCallback<Object>() {
+            @Override
+            public <K, V> Object execute(RedisOperations<K, V> redisOperations) throws DataAccessException {
+                for (String value : values) {
+                    stringRedisTemplate.boundSetOps(key).add(value);
+                }
+                return null;
+            }
+        });
     }
 
     /*ZSet相关操作*/
