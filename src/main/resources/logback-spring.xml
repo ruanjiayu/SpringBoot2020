@@ -138,6 +138,45 @@
         </filter>
     </appender>
 
+    <!-- 2.5 打印自己的业务文件level为 INFO 日志，时间滚动输出  -->
+    <appender name="BIZ_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 正在记录的日志文档的路径及文档名 -->
+        <file>${logging.path}/biz.log</file>
+        <!--日志文档输出格式-->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 日志记录器的滚动策略，按日期，按大小记录 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天日志归档路径以及格式 -->
+            <fileNamePattern>${logging.path}/biz-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!--日志文档保留天数-->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--配置自己的相关业务日志需要用到的内容-->
+    <logger name="biz_log" additivity="false" level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="BIZ_FILE"/>
+    </logger>
+    <logger name="common_info" additivity="false" level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="INFO_FILE"/>
+    </logger>
+    <logger name="common_warn" additivity="false" level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="WARN_FILE"/>
+    </logger>
+    <logger name="common_error" additivity="false" level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、
         以及指定<appender>。<logger>仅有一个name属性，
@@ -167,9 +206,9 @@
 
     <!-- 4. 最终的策略 -->
     <!-- 4.1 开发环境:打印控制台-->
-    <springProfile name="dev">
-        <logger name="com.nk.controller" level="debug"/><!-- 修改此处扫描包名 -->
-    </springProfile>
+<!--    <springProfile name="dev">-->
+<!--        <logger name="com.fun.uncle.springboot2020.controller" level="debug"/>&lt;!&ndash; 修改此处扫描包名 &ndash;&gt;-->
+<!--    </springProfile>-->
 
     <root level="info">
         <appender-ref ref="CONSOLE" />
