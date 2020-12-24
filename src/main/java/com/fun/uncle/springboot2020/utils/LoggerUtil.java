@@ -32,6 +32,11 @@ public class LoggerUtil {
      */
     public final static Logger BIZ_LOG = LoggerFactory.getLogger("biz_log");
 
+    /**
+     * http请求异常
+     */
+    public final static Logger HTTP_REMOTE = LoggerFactory.getLogger("http_remote");
+
 
 
     public static void info(Logger logger, Object... args) {
