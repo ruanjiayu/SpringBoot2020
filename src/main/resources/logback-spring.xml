@@ -237,13 +237,13 @@
     <!--        <logger name="com.fun.uncle.springboot2020.controller" level="debug"/>&lt;!&ndash; 修改此处扫描包名 &ndash;&gt;-->
     <!--    </springProfile>-->
 
+    <!-- root内填写的日志文件，如设置日志等级为info。
+    那么就会导致你的appender文件都会新增info信息，除非你进行消息过滤。
+    所以一般仅仅填写INFO_FILE 即可。
+    在你需要输出到指定文件如biz,那么你仅仅在需要的类上使用日志即可   -->
     <root level="info">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="DEBUG_FILE"/>
         <appender-ref ref="INFO_FILE"/>
-        <appender-ref ref="WARN_FILE"/>
-        <appender-ref ref="ERROR_FILE"/>
-        <appender-ref ref="HTTP_REMOTE_FILE"/>
     </root>
 
     <!-- 4.2 生产环境:输出到文档
