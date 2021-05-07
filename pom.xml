@@ -114,7 +114,7 @@
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
-            <version>4.10.124.ALL</version>
+            <version>4.10.159.ALL</version>
         </dependency>
 
         <!--钉钉相关的机器人报警-->
