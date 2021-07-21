@@ -2,6 +2,7 @@ package com.fun.uncle.springboot2020.utils;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Description:
@@ -64,5 +65,9 @@ public class UrlUtil {
             }
         }
         return strAllParam;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Objects.equals("haha", null));
     }
 }
