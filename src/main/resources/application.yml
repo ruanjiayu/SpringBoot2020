@@ -4,9 +4,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://www.fununcle.top:3306/springboot?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://www.fununcle.top:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
       username: root
-      password: ruan123456
+      password: Ruan@U66ZaNXesKCy8J95epObxSvlvgyWHdWT
       # 初始化大小，最小，最大
       initialSize: 5
       minIdle: 5
@@ -70,7 +70,7 @@ spring:
     host: www.fununcle.top
     port: 6379
     timeout: 1000
-    password: 123456
+    password: 8d^5t2xaHA2BaOZe$$6h!K*PqkgnJ8kxBCd3XMFjo&STNIDTEC3uuGfH9j8YNsZ#
     jedis:
       pool:
         max-active: 10 # 最大链接数
@@ -85,10 +85,29 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 
 # 打印指定的目录下的mysql语句，建议使用这个
-logging:
-  level:
+#logging:
+#  level:
 #    com.fun.uncle.springboot2020.mapper: DEBUG
       # 输出 SQL
-    druid.sql.Statement: debug
+#    druid.sql.Statement: debug
       # 输出查询结果
-    druid.sql.ResultSet: debug
+#    druid.sql.ResultSet: debug
+
+
+#jwt
+jwt:
+  header: Authorization
+  # 令牌前缀
+  token-start-with: Bearer
+  # 必须使用最少88位的Base64对该令牌进行编码
+  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI=
+  # 令牌过期时间 此处单位/秒 ，默认4小时，可在此网站生成 https://www.convertworld.com/zh-hans/time/milliseconds.html
+  token-validity-in-seconds: 14400
+  # 在线用户key
+  online-key: online-token-
+  # 验证码
+  code-key: code-key-
+  # token 续期检查时间范围（默认30分钟，单位秒），在token即将过期的一段时间内用户操作了，则给用户的token续期
+  detect: 1800
+  # 续期时间范围，默认1小时，单位秒
+  renew: 3600

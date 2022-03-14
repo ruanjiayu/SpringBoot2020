@@ -2,10 +2,10 @@ package com.fun.uncle.springboot2020.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
 *
@@ -21,19 +21,17 @@ public class UserInfo implements Serializable {
     private static final long serialVersionUID = 4546587735196981772L;
 
     @ApiModelProperty(value="ID")
-    private Integer id;
+    private Long id;
+
+    private String nickname;
 
     @ApiModelProperty(value="名字")
-    private String name;
+    private String username;
 
-    @ApiModelProperty(value="地址")
-    private String address;
+    @ApiModelProperty(value = "密码")
+    private String password;
 
-    @ApiModelProperty(value="年纪")
-    private Integer age;
-
-    @ApiModelProperty(value="生日")
-    private LocalDate birthday;
+    private Integer status;
 
     @ApiModelProperty(value="创建时间")
     private LocalDateTime createTime;

@@ -4,9 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 /**
  * @Description:
  * @Author: Summer
@@ -18,23 +15,8 @@ import java.time.LocalDateTime;
 public class UserVO {
 
     @ApiModelProperty(value="ID")
-    private Integer id;
+    private Long id;
 
     @ApiModelProperty(value="名字")
-    private String name;
-
-    @ApiModelProperty(value="地址")
-    private String address;
-
-    @ApiModelProperty(value="年纪")
-    private Integer age;
-
-    @ApiModelProperty(value="生日")
-    private LocalDate birthday;
-
-    @ApiModelProperty(value="创建时间")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value="更新时间")
-    private LocalDateTime updateTime;
+    private String nickname;
 }

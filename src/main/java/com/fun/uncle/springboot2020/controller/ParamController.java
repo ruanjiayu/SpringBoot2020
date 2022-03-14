@@ -42,11 +42,10 @@ public class ParamController {
 
 
     @ApiOperation(value = "@PathVariable方式")
-    @GetMapping("/pathVariable/{name}/{age}")
-    public UserVO PathVariable(@PathVariable String name, @PathVariable int age) {
+    @GetMapping("/pathVariable/{nickname}/{password}")
+    public UserVO PathVariable(@PathVariable String nickname, @PathVariable String password) {
         UserVO user = new UserVO();
-        user.setName(name);
-        user.setAge(age);
+        user.setNickname(nickname);
         return user;
     }
 

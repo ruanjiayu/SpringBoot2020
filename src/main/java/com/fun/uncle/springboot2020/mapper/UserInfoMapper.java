@@ -13,21 +13,19 @@ import java.util.List;
  */
 @Repository
 public interface UserInfoMapper {
-    int deleteByPrimaryKey(Integer id);
 
     int insert(UserInfo record);
-
-    int insertSelective(UserInfo record);
-
-    UserInfo selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(UserInfo record);
-
-    int updateByPrimaryKey(UserInfo record);
 
     /**
      * 查询所有的用户
      * @return
      */
     List<UserInfo> findAll();
+
+    /**
+     * 通过username来获取信息
+     * @param username
+     * @return
+     */
+    UserInfo getByUsername(String username);
 }

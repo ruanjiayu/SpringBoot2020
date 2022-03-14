@@ -1,7 +1,6 @@
 package com.fun.uncle.springboot2020.service;
 
 import com.fun.uncle.springboot2020.domain.UserInfo;
-import com.fun.uncle.springboot2020.request.UserRequest;
 
 import java.util.List;
 
@@ -25,5 +24,12 @@ public interface UserInfoService {
      * @return
      */
     int append(UserInfo userInfo);
+
+    /**
+     * 通过用户昵称
+     * @param username
+     * @return
+     */
+    UserInfo getByUsername(String username);
 
 }
