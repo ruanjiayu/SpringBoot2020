@@ -1,5 +1,7 @@
 package com.fun.uncle.springboot2020.utils;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * @Description: 版本工具类
  * @Author: Summer
@@ -7,6 +9,39 @@ package com.fun.uncle.springboot2020.utils;
  * @Version: 0.0.1-SNAPSHOT
  */
 public class VersionUtil {
+
+
+    private static final String DOT = "\\.";
+
+
+    /**
+     * 版本判断
+     * @param curVersion 当前版本
+     * @param minVersion 最小版本
+     * @return
+     */
+    public static boolean isSupportVersion(String curVersion, String minVersion) {
+        if (StringUtils.isAnyBlank(minVersion, curVersion)) {
+            return true;
+        }
+        String[] curVersionList = curVersion.split(DOT);
+        String[] minVersionList = minVersion.split(DOT);
+        if (curVersionList.length < 3 || minVersionList.length < 3) {
+            return true;
+        }
+
+        for (int i = 0; i < 3; i++) {
+            Integer cur = Integer.parseInt(curVersionList[i]);
+            Integer min = Integer.parseInt(minVersionList[i]);
+            // 相等则比较下一组值
+            if (cur > min) {
+                return true;
+            } else if (cur < min) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * 版本号比较
