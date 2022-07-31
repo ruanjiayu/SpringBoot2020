@@ -21,8 +21,8 @@ public class UrlUtil {
      * @author lzf
      */
     public static Map<String, String> urlSplit(String URL) {
-        Map<String, String> mapRequest = new HashMap<String, String>();
-        String[] arrSplit = null;
+        Map<String, String> mapRequest = new HashMap<>();
+        String[] arrSplit;
         String strUrlParam = TruncateUrlPage(URL);
         if (strUrlParam == null) {
             return mapRequest;
