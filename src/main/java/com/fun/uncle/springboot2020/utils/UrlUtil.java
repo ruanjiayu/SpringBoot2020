@@ -54,7 +54,7 @@ public class UrlUtil {
      */
     private static String TruncateUrlPage(String strURL) {
         String strAllParam = null;
-        String[] arrSplit = null;
+        String[] arrSplit;
         strURL = strURL.trim();
         arrSplit = strURL.split("[?]");
         if (strURL.length() > 1) {
