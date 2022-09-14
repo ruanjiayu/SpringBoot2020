@@ -13,6 +13,10 @@ public class NameUtil {
     public static void main(String[] args) {
         String substring = "我是🏀⚾️️️";
         String substring2 = "😃😏😓😠";
+
+        // 把首位截取
+        System.out.println("娃娃大方大方".substring(1));
+        // 获取前5位字符
         System.out.println(nameSub(substring, 5));
     }
 
