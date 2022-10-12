@@ -12,6 +12,7 @@ import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * @Description: 时间工具类
@@ -331,6 +332,72 @@ public class LocalDateTimeUtil {
     public static Long getTimeline() {
         LocalDateTime now = LocalDateTime.now();
         return Duration.between(now, now.plusDays(1).toLocalDate().atStartOfDay()).toMillis();
+    }
+
+    /**
+     * 得到一半的时间
+     *
+     * @return
+     */
+    public static LocalDateTime getHalfTime() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime halfTime = LocalDateTime.of(now.toLocalDate(), LocalTime.of(now.getHour(), 30));
+        LocalDateTime startTime = LocalDateTime.of(now.toLocalDate(), LocalTime.of(now.getHour(), 0));
+        return now.isAfter(halfTime) ? halfTime : startTime;
+    }
+
+    /**
+     * 整个月份消费。
+     * 每天消费
+     *
+     * @param optMonth
+     * @param consumer
+     */
+    public static void consumerMonth(String optMonth, Consumer<LocalDate> consumer) {
+        String startDayStr = optMonth + "-01";
+        LocalDate startDay = LocalDate.parse(startDayStr);
+        LocalDate now = LocalDate.now();
+        for (int i = 0; i < 32; i++) {
+            LocalDate optDate = startDay.plusDays(i);
+            // 跳出循环
+            // 1. 选中的日期大于等于今天
+            // 2. 选中的日期已经翻月了
+            if (!optDate.isBefore(now) || optDate.isAfter(startDay.with(TemporalAdjusters.lastDayOfMonth()))) {
+                break;
+            }
+            consumer.accept(optDate);
+        }
+    }
+
+    /**
+     * 整个月份消费。
+     * 每半小时归档一次
+     *
+     * @param optMonth
+     * @param consumer
+     */
+    public static void consumerDay(String optMonth, Consumer<LocalDateTime> consumer) {
+        String startDayStr = optMonth + "-01";
+        LocalDate startDay = LocalDate.parse(startDayStr);
+        LocalDate nowDate = LocalDate.now();
+        LocalDateTime nowTime = LocalDateTime.now();
+        for (int i = 0; i < 32; i++) {
+            LocalDate optDate = startDay.plusDays(i);
+            // 跳出循环
+            // 1. 选中的日期大于今天
+            // 2. 选中的日期已经翻月了
+            if (optDate.isAfter(nowDate) || optDate.isAfter(startDay.with(TemporalAdjusters.lastDayOfMonth()))) {
+                break;
+            }
+            // 时间波动
+            for (int t = 0; t < 48; t++) {
+                LocalDateTime optTime = LocalDateTime.of(optDate, LocalTime.MIN.plusMinutes(t * 30));
+                if (optTime.isAfter(nowTime)) {
+                    break;
+                }
+                consumer.accept(optTime);
+            }
+        }
     }
 
 }
