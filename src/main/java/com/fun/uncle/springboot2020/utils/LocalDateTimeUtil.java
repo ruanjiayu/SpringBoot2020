@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Date;
 import java.util.Objects;
@@ -95,6 +96,23 @@ public class LocalDateTimeUtil {
         try {
             if (Objects.nonNull(dateTime)) {
                 return format.getFormatter().format(dateTime);
+            }
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    /**
+     * 将LocalDateTime转化为字符串格式
+     *
+     * @param dateTime
+     * @param format DateTimeFormatter.ofPattern("yyyy-MM-dd")
+     * @return
+     */
+    public static String format(LocalDateTime dateTime, DateTimeFormatter format) {
+        try {
+            if (Objects.nonNull(dateTime)) {
+                return format.format(dateTime);
             }
         } catch (Exception e) {
         }
