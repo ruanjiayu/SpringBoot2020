@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.config.redis;
+package com.fun.uncle.springboot2020.config.redis.facade;
 
 import java.util.List;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime: 2020/7/26 4:37 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public interface RedisBasicListOperation {
+public interface RedisListFacade {
 
 
     /**

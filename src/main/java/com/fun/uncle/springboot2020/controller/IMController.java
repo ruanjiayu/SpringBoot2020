@@ -1,7 +1,9 @@
 package com.fun.uncle.springboot2020.controller;
 
 import com.fun.uncle.springboot2020.request.IMRequest;
+import com.fun.uncle.springboot2020.result.CalResult;
 import com.fun.uncle.springboot2020.utils.LoggerUtil;
+import com.fun.uncle.springboot2020.vo.CommonResult;
 import com.google.common.collect.Lists;
 import io.github.doocs.im.ImClient;
 import io.github.doocs.im.constant.ActionStatus;
@@ -63,6 +65,19 @@ public class IMController {
         result.setErrorInfo("");
         result.setErrorCode(0);
         return result;
+    }
+
+    @ApiOperation("测试下回调")
+    @GetMapping(value = "/cal")
+    public CommonResult<CalResult> cal(){
+        CalResult result = new CalResult();
+        result.setNickname("");
+        result.setHeadPic("");
+        result.setTimeStr("");
+        result.setNum(0);
+        result.setDuration(0);
+        result.setkCalStr("123");
+        return CommonResult.sucess(result);
     }
 
 }

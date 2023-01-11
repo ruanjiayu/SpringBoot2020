@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.config.redis;
+package com.fun.uncle.springboot2020.config.redis.facade;
 
 /**
  * @Description: redis 基础Hash操作
@@ -6,7 +6,7 @@ package com.fun.uncle.springboot2020.config.redis;
  * @DateTime: 2020/7/26 4:24 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public interface RedisBasicHashOperation {
+public interface RedisHashFacade {
 
 
     /**

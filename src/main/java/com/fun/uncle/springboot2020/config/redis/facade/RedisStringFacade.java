@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.config.redis;
+package com.fun.uncle.springboot2020.config.redis.facade;
 
 import java.util.concurrent.TimeUnit;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime: 2020/7/26 4:21 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public interface RedisBasicStringOperation {
+public interface RedisStringFacade {
 
     /**
      * 获取redis中的值

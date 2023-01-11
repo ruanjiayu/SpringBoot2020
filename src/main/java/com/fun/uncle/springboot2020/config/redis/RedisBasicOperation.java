@@ -1,5 +1,11 @@
 package com.fun.uncle.springboot2020.config.redis;
 
+import com.fun.uncle.springboot2020.config.redis.facade.RedisHashFacade;
+import com.fun.uncle.springboot2020.config.redis.facade.RedisKeyFacade;
+import com.fun.uncle.springboot2020.config.redis.facade.RedisListFacade;
+import com.fun.uncle.springboot2020.config.redis.facade.RedisSetFacade;
+import com.fun.uncle.springboot2020.config.redis.facade.RedisStringFacade;
+import com.fun.uncle.springboot2020.config.redis.facade.RedisZSetFacade;
 import com.fun.uncle.springboot2020.utils.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -28,7 +34,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 @Slf4j
-public class RedisBasicOperation implements RedisBasicKeyOperation, RedisBasicStringOperation, RedisBasicHashOperation, RedisBasicListOperation, RedisBasicSetOperation, RedisBasicZSetOperation {
+public class RedisBasicOperation implements RedisKeyFacade, RedisStringFacade, RedisHashFacade, RedisListFacade, RedisSetFacade, RedisZSetFacade {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
