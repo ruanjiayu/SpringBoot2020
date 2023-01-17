@@ -82,7 +82,7 @@ spring:
 #mybatis 相关配置
 mybatis:
   type-aliases-package: com.fun.uncle.springboot2020.domain
-  mapper-locations: classpath:mapper/*.xml
+  mapper-locations: classpath:mapper/**/*.xml # **表示任意目录 *表示任意文件
 
 # 打印指定的目录下的mysql语句，建议使用这个
 #logging:
