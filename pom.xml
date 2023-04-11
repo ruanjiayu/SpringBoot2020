@@ -86,6 +86,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--websocket 不花钱的方法-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
         <!-- mqtt -->
         <dependency>
             <groupId>org.springframework.integration</groupId>
