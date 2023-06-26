@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.config.obs.sts;
+package com.fun.uncle.springboot2020.obs.sts;
 
 import com.obs.services.ObsClient;
 import com.obs.services.model.PutObjectResult;

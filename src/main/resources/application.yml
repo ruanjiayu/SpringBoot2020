@@ -95,16 +95,21 @@ mybatis:
 
 ## MQTT##
 mqtt:
-  username: internalDuoGuan
-  password: duoguan@emqx
-  host-url: tcp://47.110.151.225:11883
+  username:
+  password:
+  host-url: tcp://ip:11883
 #  in-client-id: ${random.value}         # 随机值，使出入站 client ID 不同
-  in-client-id: in${random.value}        # 随机值，使出入站 client ID 不同
-  out-client-id: out${random.value}
-  #  client-id: ${random.int}                   # 客户端Id，不能相同，采用随机数 ${random.value}
-  client-id: ruanjiayu${random.int}
-  default-topic: im/#        # 默认主题
+  in-client-id: summerIn${random.value}        # 随机值，使出入站 client ID 不同
+  out-client-id: summerOut${random.value}
+  client-id: ${random.int}                   # 客户端Id，不能相同，采用随机数 ${random.value}
+  default-topic: $share/testTaskGroup/test/skipRope/dataUp/#, $share/testTaskGroup/client/event       # 默认主题
   timeout: 60                                # 超时时间
   keepalive: 60                              # 保持连接
   clearSession: true                         # 清除会话(设置为false,断开连接，重连后使用原来的会话 保留订阅的主题，能接收离线期间的消息)
 
+## obs 相关配置 ##
+obs:
+  endPoint: #endpoint#
+  ak: #永久的AK#
+  sk: #永久的SK#
+  bucketName: #自己的bucket#

@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.config.obs;
+package com.fun.uncle.springboot2020.obs;
 
 import com.obs.services.ObsClient;
 import com.obs.services.model.AccessControlList;
