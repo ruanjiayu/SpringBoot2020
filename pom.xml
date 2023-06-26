@@ -218,6 +218,20 @@
             <version>3.1.42</version>
         </dependency>
 
+        <!--阿里云OSS-->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.16.3</version>
+        </dependency>
+
+        <!--阿里STS Security Token Service-->
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>aliyun-java-sdk-sts</artifactId>
+            <version>3.1.1</version>
+        </dependency>
+
         <!--IM相关的SDK-->
         <dependency>
             <groupId>io.github.doocs</groupId>

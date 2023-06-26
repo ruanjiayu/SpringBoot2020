@@ -17,7 +17,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 // 不扫描对应的文件夹，因为需要相关配置
 @ComponentScan(excludeFilters = {
         @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.fun.uncle.springboot2020.mqtt.*"),
-        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.fun.uncle.springboot2020.obs.*")
+        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.fun.uncle.springboot2020.obs.*"),
+        @ComponentScan.Filter(type = FilterType.REGEX, pattern = "com.fun.uncle.springboot2020.oss.*")
 
 })
 

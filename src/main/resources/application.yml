@@ -113,3 +113,13 @@ obs:
   ak: #永久的AK#
   sk: #永久的SK#
   bucketName: #自己的bucket#
+
+aliyun:
+  oss:
+    accessKey:
+    secret:
+    roleArn: acs:ram::1722036088967776:role/aliyunosstokengeneratorrole
+    roleSessionName: external-username
+    endpoint:
+    bucketName:
+    privateBucketName:
