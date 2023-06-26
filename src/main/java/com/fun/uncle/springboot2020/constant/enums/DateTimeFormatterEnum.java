@@ -40,7 +40,9 @@ public enum DateTimeFormatterEnum {
 
     FORMAT_YY_MM_DD(15, "yyyy年MM月dd日", DateTimeFormatter.ofPattern("yyyy年MM月dd日")),
 
-    FORMAT_MM_DD(16, "MM月dd日", DateTimeFormatter.ofPattern("MM月dd日"));
+    FORMAT_MM_DD(16, "MM月dd日", DateTimeFormatter.ofPattern("MM月dd日")),
+
+    FORMAT_Y_M_D_BIAS(17, "yyyy/MM/dd", DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 
     /**
      * id
