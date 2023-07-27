@@ -1,5 +1,6 @@
 package com.fun.uncle.springboot2020.controller;
 
+import com.fun.uncle.springboot2020.config.GetModelPathHandler;
 import com.fun.uncle.springboot2020.utils.LoggerUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,6 +31,9 @@ public class HelloController {
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
+    @Autowired
+    private GetModelPathHandler getModelPathHandler;
+
     @GetMapping(value = "hello")
     @ApiOperation("Hello Spring Boot 方法")
     public String hello(@RequestParam(value = "name", required = false) String name) {
@@ -41,9 +45,13 @@ public class HelloController {
             return name + " Hello Spring Boot";
         }
         name = "徐帆";
-         if (StringUtils.isNotBlank(stringRedisTemplate.opsForValue().get("hello"))) {
-             name = stringRedisTemplate.opsForValue().get("hello");
-         }
-        return   name + "Hello Spring Boot";
+        if (StringUtils.isNotBlank(stringRedisTemplate.opsForValue().get("hello"))) {
+            name = stringRedisTemplate.opsForValue().get("hello");
+        }
+
+        LoggerUtil.info(common_info, "本服务接口", getModelPathHandler.getAllAddTagAnnotationUrl());
+        LoggerUtil.info(common_info, "注解和URL匹配", getModelPathHandler.getApiOperationToGetMappingMapping());
+
+        return name + "Hello Spring Boot";
     }
 }
