@@ -86,6 +86,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- 压缩算法 -->
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack-core</artifactId>
+            <version>0.9.5</version>
+        </dependency>
+
         <!--websocket 不花钱的方法-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
