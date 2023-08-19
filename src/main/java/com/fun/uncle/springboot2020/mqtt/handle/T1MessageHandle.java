@@ -1,4 +1,4 @@
-package com.fun.uncle.springboot2020.mqtt;
+package com.fun.uncle.springboot2020.mqtt.handle;
 
 import com.fun.uncle.springboot2020.utils.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
-public class MqttMessageHandle  implements MessageHandler {
+public class T1MessageHandle implements MessageHandler {
 
     private final static Logger common_info = LoggerUtil.COMMON_INFO;
 
@@ -28,7 +28,7 @@ public class MqttMessageHandle  implements MessageHandler {
         MessageHeaders headers = message.getHeaders();
         //获取消息Topic
         String receivedTopic = (String) headers.get(MqttHeaders.RECEIVED_TOPIC);
-        log.info("[获取到的消息的topic :]{} ", receivedTopic);
+        log.info("[获取到的消息的topic1 :]{} ", receivedTopic);
         //获取消息体
         String payload = (String) message.getPayload();
         log.info("[获取到的消息的payload :]{} ", payload);

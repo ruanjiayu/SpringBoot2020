@@ -3,8 +3,10 @@ package com.fun.uncle.springboot2020.mqtt;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.ExecutorChannel;
 import org.springframework.integration.core.MessageProducer;
@@ -17,6 +19,8 @@ import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.util.Map;
+
 /**
  * @Description:
  * @Author: summer
@@ -24,6 +28,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
  * @Version: 1.0.0
  */
 @Configuration
+@Import(MqttHandlersAutoConfiguration.class) // 导入配置类
 public class MqttConfig {
 
     /**
@@ -32,12 +37,15 @@ public class MqttConfig {
     @Autowired
     private MqttProperties mqttProperties;
 
-    @Autowired
-    private MqttMessageHandle mqttMessageHandle;
-
     @Qualifier(value = "mqttThreadPoolTaskExecutor")
     @Autowired
     private ThreadPoolTaskExecutor mqttThreadPoolTaskExecutor;
+
+    @Autowired
+    private RouterMessageHandler routerMessageHandler;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
 
     //Mqtt 客户端工厂
@@ -66,7 +74,7 @@ public class MqttConfig {
     // Mqtt 管道适配器
     @Bean
     public MqttPahoMessageDrivenChannelAdapter adapter(MqttPahoClientFactory factory) {
-        return new MqttPahoMessageDrivenChannelAdapter(mqttProperties.getClientId(), factory, mqttProperties.getDefaultTopic().split(","));
+        return new MqttPahoMessageDrivenChannelAdapter(mqttProperties.getClientId(), factory, mqttProperties.getSubscribeTopics().toArray(new String[0]));
     }
 
 
@@ -93,13 +101,25 @@ public class MqttConfig {
     }
 
     @Bean
-    //使用ServiceActivator 指定接收消息的管道为 mqttInboundChannel，投递到mqttInboundChannel管道中的消息会被该方法接收并执行
-    @ServiceActivator(inputChannel = "mqttInboundChannel")
-    public MessageHandler handleMessage() {
-        return mqttMessageHandle;
+    public static RouterMessageHandler createRouterMessageHandler(ApplicationContext applicationContext, MqttProperties mqttProperties) {
+        RouterMessageHandler router = new RouterMessageHandler();
+        Map<String, String> map = mqttProperties.getHandleTopic();
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            router.addTopicHandler(entry.getValue(), applicationContext.getBean(entry.getKey(), MessageHandler.class));
+        }
+
+//        router.addTopicHandler("dev/a", t1MessageHandle);
+//        router.addTopicHandler("dev/b", t2MessageHandle);
+        return router;
     }
 
-    //出站消息管道，
+    @Bean
+    @ServiceActivator(inputChannel = "mqttInboundChannel")
+    public RouterMessageHandler routerMessageHandler() {
+        return createRouterMessageHandler(applicationContext, mqttProperties);
+    }
+
+    //出站消息管道
     @Bean
     public MessageChannel mqttOutboundChannel() {
         return new ExecutorChannel(mqttThreadPoolTaskExecutor);
@@ -109,7 +129,6 @@ public class MqttConfig {
     // 入站消息管道
     @Bean
     public MessageChannel mqttInboundChannel() {
-        // 用线程池
         return new ExecutorChannel(mqttThreadPoolTaskExecutor);
     }
 

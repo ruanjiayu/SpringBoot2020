@@ -77,6 +77,8 @@ spring:
         min-idle: 5 # 最小核心线程
         max-idle: 10 # 最大线程
         max-wait: 2000 # 最大等待时间2S
+  profiles:
+    include: mqtt #用英文逗号分割如有多个
 
 
 #mybatis 相关配置
@@ -93,19 +95,6 @@ mybatis:
       # 输出查询结果
 #    druid.sql.ResultSet: debug
 
-## MQTT##
-mqtt:
-  username:
-  password:
-  host-url: tcp://ip:11883
-#  in-client-id: ${random.value}         # 随机值，使出入站 client ID 不同
-  in-client-id: summerIn${random.value}        # 随机值，使出入站 client ID 不同
-  out-client-id: summerOut${random.value}
-  client-id: ${random.int}                   # 客户端Id，不能相同，采用随机数 ${random.value}
-  default-topic: $share/testTaskGroup/test/skipRope/dataUp/#, $share/testTaskGroup/client/event       # 默认主题
-  timeout: 60                                # 超时时间
-  keepalive: 60                              # 保持连接
-  clearSession: true                         # 清除会话(设置为false,断开连接，重连后使用原来的会话 保留订阅的主题，能接收离线期间的消息)
 
 ## obs 相关配置 ##
 obs:

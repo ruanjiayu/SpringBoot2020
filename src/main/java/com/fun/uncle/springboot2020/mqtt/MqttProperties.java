@@ -1,7 +1,10 @@
 package com.fun.uncle.springboot2020.mqtt;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Description:
@@ -10,64 +13,57 @@ import org.springframework.stereotype.Component;
  * @Version: 1.0.0
  */
 @Component
+@ConfigurationProperties(prefix = "mqtt")
 public class MqttProperties {
 
     /**
      * 用户名
      */
-    @Value("${mqtt.username}")
     private String username;
 
     /**
      * 密码
      */
-    @Value("${mqtt.password}")
     private String password;
 
     /**
      * 连接地址
      */
-    @Value("${mqtt.host-url}")
     private String hostUrl;
 
     /**
      * 进-客户Id
      */
-    @Value("${mqtt.in-client-id}")
     private String inClientId;
 
     /**
      * 出-客户Id
      */
-    @Value("${mqtt.out-client-id}")
     private String outClientId;
 
     /**
      * 客户Id
      */
-    @Value("${mqtt.client-id}")
     private String clientId;
 
     /**
      * 默认连接话题
      */
-    @Value("${mqtt.default-topic}")
-    private String defaultTopic;
+    private List<String> subscribeTopics;
+
+    private Map<String, String> handleTopic;
 
     /**
      * 超时时间
      */
-    @Value("${mqtt.timeout}")
     private int timeout;
 
     /**
      * 保持连接数
      */
-    @Value("${mqtt.keepalive}")
     private int keepalive;
 
     /**是否清除session*/
-    @Value("${mqtt.clearSession}")
     private boolean clearSession;
 
     public String getUsername() {
@@ -118,12 +114,20 @@ public class MqttProperties {
         this.clientId = clientId;
     }
 
-    public String getDefaultTopic() {
-        return defaultTopic;
+    public List<String> getSubscribeTopics() {
+        return subscribeTopics;
     }
 
-    public void setDefaultTopic(String defaultTopic) {
-        this.defaultTopic = defaultTopic;
+    public void setSubscribeTopics(List<String> subscribeTopics) {
+        this.subscribeTopics = subscribeTopics;
+    }
+
+    public Map<String, String> getHandleTopic() {
+        return handleTopic;
+    }
+
+    public void setHandleTopic(Map<String, String> handleTopic) {
+        this.handleTopic = handleTopic;
     }
 
     public int getTimeout() {
