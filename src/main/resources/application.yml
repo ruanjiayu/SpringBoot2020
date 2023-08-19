@@ -4,9 +4,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://www.fununcle.top:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
-      username: root
-      password: Ruan@U66ZaNXesKCy8J95epObxSvlvgyWHdWT
+      url: jdbc:mysql://ip:3306/test?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      username: username
+      password: password
       # 初始化大小，最小，最大
       initialSize: 5
       minIdle: 5
@@ -67,10 +67,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss # 解决前端传递过来的参数不能转成LocalDateTime
   redis:
-    host: www.fununcle.top
+    host: ip
     port: 6379
     timeout: 1000
-    password: 8d^5t2xaHA2BaOZe$$6h!K*PqkgnJ8kxBCd3XMFjo&STNIDTEC3uuGfH9j8YNsZ#
+    password: password
     jedis:
       pool:
         max-active: 10 # 最大链接数
