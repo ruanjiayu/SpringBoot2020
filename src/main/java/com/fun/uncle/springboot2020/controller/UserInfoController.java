@@ -2,6 +2,7 @@ package com.fun.uncle.springboot2020.controller;
 
 import com.fun.uncle.springboot2020.domain.UserInfo;
 import com.fun.uncle.springboot2020.service.UserInfoService;
+import com.fun.uncle.springboot2020.service.db2.Db2UserInfoService;
 import com.fun.uncle.springboot2020.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,13 +28,30 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "userInfo")
 public class UserInfoController {
+
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private Db2UserInfoService db2UserInfoService;
+
     @ApiOperation(value = "查询所有用户")
-    @GetMapping(value = "findAll")
-    public List<UserVO> findAll() {
+    @GetMapping(value = "findDb1")
+    public List<UserVO> findDb1() {
         List<UserInfo> userInfos = userInfoService.findAll();
+        List<UserVO> results = userInfos.stream().map(userInfo -> {
+            UserVO userVO = new UserVO();
+            BeanUtils.copyProperties(userInfo, userVO);
+            return userVO;
+        }).collect(Collectors.toList());
+        return results;
+    }
+
+
+    @ApiOperation(value = "查询所有用户在数据库二")
+    @GetMapping(value = "findDb2")
+    public List<UserVO> findDb2() {
+        List<UserInfo> userInfos = db2UserInfoService.findAll();
         List<UserVO> results = userInfos.stream().map(userInfo -> {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(userInfo, userVO);

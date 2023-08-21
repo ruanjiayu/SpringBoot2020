@@ -37,6 +37,9 @@ public class UserInfo implements Serializable {
     @ApiModelProperty(value="更新时间")
     private LocalDateTime updateTime;
 
+    public UserInfo() {
+    }
+
     public UserInfo(Builder builder) {
         this.id = builder.id;
         this.nickname = builder.nickname;

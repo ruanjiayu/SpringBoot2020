@@ -11,7 +11,12 @@ public interface CacheKey {
     /**
      * 所有用户的信息
      */
-    String USER_INFO_ALL = "user_info_all";
+    String USER_INFO_ALL_DB1 = "user_info_all_db1";
+
+    /**
+     *
+     */
+    String USER_INFO_ALL_DB2 = "user_info_all_db2";
 
     /**
      * 测试锁
