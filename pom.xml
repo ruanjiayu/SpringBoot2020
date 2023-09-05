@@ -87,6 +87,13 @@
             <version>0.9.5</version>
         </dependency>
 
+        <!-- ffmpeg使用 -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+
         <!--websocket 不花钱的方法-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
