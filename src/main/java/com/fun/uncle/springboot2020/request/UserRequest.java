@@ -19,7 +19,7 @@ import java.time.LocalDate;
  * @Version: 0.0.1-SNAPSHOT
  */
 @Data
-public class UserRequest {
+public class UserRequest implements AesParams {
 
     @NotEmpty(message = "名字不能为空")
     private String name;

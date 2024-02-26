@@ -2,6 +2,8 @@ package com.fun.uncle.springboot2020.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -26,6 +28,7 @@ public class WebConfigurer implements WebMvcConfigurer {
      * 正向迭代 org.springframework.web.servlet.DispatcherServlet#doDispatch(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      * 逆向迭代 org.springframework.web.servlet.HandlerExecutionChain#applyPreHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      * 逆向迭代 org.springframework.web.servlet.HandlerExecutionChain#applyPostHandle(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse, org.springframework.web.servlet.ModelAndView)
+     *
      * @param registry
      */
     @Override
@@ -34,5 +37,14 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(timeInterceptor);
     }
 
+    /**
+     * 当客户端请求资源时，服务器将默认返回JSON格式的数据。
+     *
+     * @param configurer
+     */
+    @Override
+    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+        configurer.defaultContentType(MediaType.APPLICATION_JSON);
+    }
 
 }

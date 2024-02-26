@@ -1,10 +1,12 @@
 package com.fun.uncle.springboot2020.controller;
 
 import com.fun.uncle.springboot2020.request.UserRequest;
+import com.fun.uncle.springboot2020.utils.LoggerUtil;
+import com.fun.uncle.springboot2020.vo.CommonResult;
 import com.fun.uncle.springboot2020.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.BeanUtils;
+import org.slf4j.Logger;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ParamController {
 
+    private final static Logger logger = LoggerUtil.COMMON_INFO;
 
     @ApiOperation("无参构造方法")
     @GetMapping(value = "/noAnnotation")
@@ -52,10 +55,13 @@ public class ParamController {
 
     @ApiOperation(value = "@RequestBody")
     @PostMapping("/requestBody")
-    public UserVO requestBody(@RequestBody @Validated UserRequest userRequest) {
+    public CommonResult<UserVO> requestBody(@RequestBody @Validated UserRequest userRequest) {
+        LoggerUtil.info(logger, userRequest);
         UserVO userVO = new UserVO();
-        BeanUtils.copyProperties(userRequest, userVO);
-        return userVO;
+        userVO.setId(1L);
+        userVO.setNickname("RequestBody");
+
+        return CommonResult.sucess(userVO);
     }
 
 

@@ -1,5 +1,8 @@
 #数据源配置
 spring:
+  main:
+    # 允许循环依赖
+    allow-circular-references: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss # 解决前端传递过来的参数不能转成LocalDateTime
   redis:

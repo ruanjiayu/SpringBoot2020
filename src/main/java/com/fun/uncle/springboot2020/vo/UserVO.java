@@ -19,4 +19,8 @@ public class UserVO {
 
     @ApiModelProperty(value="名字")
     private String nickname;
+
+    private String address;
+
+    private Integer age;
 }
