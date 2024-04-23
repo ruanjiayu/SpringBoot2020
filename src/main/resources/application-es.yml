@@ -1,0 +1,10 @@
+# elasticsearch相关配置信息
+elasticsearch:
+  # 集群节点，多个节点采用逗号分隔，需要替换为ecs的ip
+  clusterNodes: ip:9200
+  username: username
+  password: password
+  shards-number: 3
+  replicas-number: 2
+  return-size: 10000
+  search-result-size: 20

@@ -17,7 +17,7 @@ spring:
         max-idle: 10 # 最大线程
         max-wait: 2000 # 最大等待时间2S
   profiles:
-    include: mqtt, mysql-mult #用英文逗号分割如有多个
+    include: mqtt, mysql-mult, es #用英文逗号分割如有多个
 
 
 #mybatis 相关配置
