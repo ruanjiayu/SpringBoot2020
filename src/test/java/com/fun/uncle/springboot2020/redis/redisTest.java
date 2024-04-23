@@ -1,6 +1,6 @@
 package com.fun.uncle.springboot2020.redis;
 
-import com.fun.uncle.springboot2020.SpringBoot2020ApplicationTests;
+import com.fun.uncle.springboot2020.ApplicationTests;
 import com.fun.uncle.springboot2020.config.redis.RedisAdvancedOperation;
 import com.fun.uncle.springboot2020.config.redis.RedisBasicOperation;
 import org.assertj.core.util.Lists;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @DateTime: 2020/7/26 2:52 下午
  * @Version: 0.0.1-SNAPSHOT
  */
-public class redisTest extends SpringBoot2020ApplicationTests {
+public class redisTest extends ApplicationTests {
 
     @Autowired
     private RedisBasicOperation redisBasicOperation;

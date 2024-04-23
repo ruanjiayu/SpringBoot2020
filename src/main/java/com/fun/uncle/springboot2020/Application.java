@@ -24,10 +24,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @MapperScan("com.fun.uncle.springboot2020.mapper")
 @EnableScheduling
-public class SpringBoot2020Application {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBoot2020Application.class, args);
+        SpringApplication.run(Application.class, args);
     }
 
 }
