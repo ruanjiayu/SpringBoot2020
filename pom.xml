@@ -193,6 +193,13 @@
             <version>${commons-lang3-apache.version}</version>
         </dependency>
 
+        <!-- 元素校验的包-->
+        <dependency>
+            <groupId>net.sf.oval</groupId>
+            <artifactId>oval</artifactId>
+            <version>3.2.1</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
