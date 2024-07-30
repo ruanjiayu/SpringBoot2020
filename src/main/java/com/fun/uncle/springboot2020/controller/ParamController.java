@@ -1,6 +1,8 @@
 package com.fun.uncle.springboot2020.controller;
 
+import com.fun.uncle.springboot2020.annotation.Validate;
 import com.fun.uncle.springboot2020.request.UserRequest;
+import com.fun.uncle.springboot2020.request.UserRequest2;
 import com.fun.uncle.springboot2020.utils.LoggerUtil;
 import com.fun.uncle.springboot2020.vo.CommonResult;
 import com.fun.uncle.springboot2020.vo.UserVO;
@@ -66,6 +68,15 @@ public class ParamController {
 
 
 
+    @ApiOperation(value = "自己定义的参数校验")
+    @PostMapping("/selfValidate")
+    public CommonResult<UserVO> selfValidate(@RequestBody @Validate UserRequest2 userRequest) {
+        LoggerUtil.info(logger, userRequest);
+        UserVO userVO = new UserVO();
+        userVO.setId(1L);
+        userVO.setNickname("自己定义的参数校验");
 
+        return CommonResult.sucess(userVO);
+    }
 
 }
