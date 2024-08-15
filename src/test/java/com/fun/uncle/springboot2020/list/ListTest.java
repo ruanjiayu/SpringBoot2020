@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import org.apache.commons.collections4.ListUtils;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,6 +27,9 @@ public class ListTest {
 
         List<Integer> union = ListUtils.union(integers1, integers2);
         System.out.println(union);
+
+        HashMap<Object, Object> hashMap = new HashMap<>();
+        System.out.println(hashMap.get(null));
     }
 
     /**
