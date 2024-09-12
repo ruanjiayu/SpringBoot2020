@@ -14,7 +14,7 @@
     <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fun.uncle.springboot2020.domain.UserInfo"
             useGeneratedKeys="true">
         insert into user_info (`nickname`, username, password)
-        values (#{nickname,jdbcType=VARCHAR}, #{username}, #{password,jdbcType=VARCHAR})
+        values (#{nickname}, #{username}, #{password})
     </insert>
 
 
@@ -27,4 +27,13 @@
         where username = #{username}
           and status = 1
     </select>
+
+    <insert id="batchAdd" keyColumn="id" keyProperty="id" parameterType="com.fun.uncle.springboot2020.domain.UserInfo"
+            useGeneratedKeys="true">
+        insert into user_info (`nickname`, username, password)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.nickname}, #{item.username}, #{item.password})
+        </foreach>
+    </insert>
 </mapper>

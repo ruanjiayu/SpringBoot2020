@@ -14,19 +14,30 @@ public interface UserInfoService {
 
     /**
      * 查询所有的用户
+     *
      * @return
      */
     List<UserInfo> findAll();
 
     /**
      * 插入一条记录
+     *
      * @param userInfo
      * @return
      */
     int append(UserInfo userInfo);
 
     /**
+     * 批量增加数据
+     *
+     * @param records
+     * @return
+     */
+    int batchAdd(List<UserInfo> records);
+
+    /**
      * 通过用户昵称
+     *
      * @param username
      * @return
      */

@@ -1,6 +1,6 @@
 package com.fun.uncle.springboot2020.mapper.db2;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
+//import com.baomidou.dynamic.datasource.annotation.DS;
 import com.fun.uncle.springboot2020.domain.UserInfo;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @Version: 0.0.1-SNAPSHOT
  */
 @Repository
-@DS("db2")
+//@DS("db2")
 public interface Db2UserInfoMapper {
 
     int insert(UserInfo record);

@@ -67,4 +67,12 @@ public class UserInfoController {
         int success = userInfoService.append(userInfo);
         return Objects.equals(success, 1) ? "插入成功" : "插入失败";
     }
+
+
+    @ApiOperation(value = "插入用户")
+    @PostMapping(value = "batchAdd")
+    public String append(@RequestBody List<UserInfo> list) {
+        int success = userInfoService.batchAdd(list);
+        return success > 0 ? "插入成功" : "插入失败";
+    }
 }
