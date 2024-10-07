@@ -67,7 +67,7 @@ public class HelloController {
         userVO.setId(request.getId());
         userVO.setNickname(request.getNickname());
         userVO.setAge(10);
-        userVO.setAddress("绍兴皋埠");
+        userVO.setAddress("绍兴");
         return CommonResult.sucess(userVO);
     }
 }

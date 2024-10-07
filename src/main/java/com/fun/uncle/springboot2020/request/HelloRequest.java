@@ -2,6 +2,7 @@ package com.fun.uncle.springboot2020.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Description:
@@ -10,8 +11,7 @@ import lombok.Data;
  * @Version: 1.0.0
  */
 @Data
-@AllArgsConstructor
-public class HelloRequest implements AesParams {
+public class HelloRequest {
 
     private Long id;
 

@@ -11,11 +11,11 @@
                update_time
         from user_info
     </sql>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fun.uncle.springboot2020.domain.UserInfo"
-            useGeneratedKeys="true">
-        insert into user_info (`nickname`, username, password)
-        values (#{nickname}, #{username}, #{password})
-    </insert>
+<!--    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.fun.uncle.springboot2020.domain.UserInfo"-->
+<!--            useGeneratedKeys="true">-->
+<!--        insert into user_info (`nickname`, username, password)-->
+<!--        values (#{nickname}, #{username}, #{password})-->
+<!--    </insert>-->
 
 
     <select id="findAll" resultType="com.fun.uncle.springboot2020.domain.UserInfo">
@@ -36,4 +36,12 @@
             (#{item.nickname}, #{item.username}, #{item.password})
         </foreach>
     </insert>
+
+
+    <update id="removeByNicknameAndPassword">
+        update user_info
+        set status = 1
+        where nickname = #{nickname}
+          and password = #{password}
+    </update>
 </mapper>

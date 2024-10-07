@@ -2,6 +2,7 @@ package com.fun.uncle.springboot2020.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.fun.uncle.springboot2020.domain.UserInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +16,8 @@ import java.util.List;
 @Repository
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
 
-    @Override
-    int insert(UserInfo record);
+//    @Override
+/*    int insert(UserInfo record);*/
 
     /**
      * 查询所有的用户
@@ -41,4 +42,13 @@ public interface UserInfoMapper extends BaseMapper<UserInfo> {
      * @return
      */
     UserInfo getByUsername(String username);
+
+    /**
+     * 删除
+     *
+     * @param nickname
+     * @param password
+     * @return
+     */
+    int removeByNicknameAndPassword(@Param("nickname") String nickname, @Param("password") String password);
 }

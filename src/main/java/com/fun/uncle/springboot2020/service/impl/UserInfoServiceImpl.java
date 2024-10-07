@@ -11,6 +11,7 @@ import com.fun.uncle.springboot2020.utils.LoggerUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Function;
@@ -42,8 +43,21 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public int append(UserInfo userInfo) {
-        return userInfoMapper.insert(userInfo);
+//        return userInfoMapper.insert(userInfo);
+        LoggerUtil.info(common_info, "开始", userInfo);
+        userInfoMapper.removeByNicknameAndPassword(userInfo.getNickname(), userInfo.getPassword());
+        LoggerUtil.info(common_info, "删除后新增", userInfo);
+        try {
+            Thread.sleep(15000L);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        int i = userInfoMapper.insert(userInfo);
+        LoggerUtil.info(common_info, "结束", userInfo);
+        return i;
+
     }
 
     @Override
