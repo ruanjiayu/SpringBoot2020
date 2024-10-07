@@ -4,6 +4,7 @@ import cn.hutool.crypto.SecureUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fun.uncle.springboot2020.request.AesParams;
+import com.fun.uncle.springboot2020.vo.AesCommonResult;
 import com.fun.uncle.springboot2020.vo.CommonResult;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -78,7 +79,7 @@ public class EncryptRequestResponseBodyAdvice extends RequestBodyAdviceAdapter i
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        return CommonResult.class.equals(returnType.getParameterType());
+        return AesCommonResult.class.equals(returnType.getParameterType());
     }
 
     @Override
