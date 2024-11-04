@@ -29,35 +29,96 @@ public class RedisCacheManager extends RedisBasicOperation {
 
     /**
      * 如果redis中存在值，那么直接将其取出，不然就是相应操作后，将其值放入缓存
-     * @param supplier 相关操作
+     *
+     * @param supplier    相关操作
      * @param resultClazz 返回的类型
-     * @param key 缓存值key
-     * @param time 时间
-     * @param timeUnit 时间单位 TimeUnit.SECONDS
-     * @param <T> 泛形
+     * @param key         缓存值key
+     * @param time        时间
+     * @param <T>         泛形
      * @return
      */
     public <T> T assembleRedisObject(Supplier<T> supplier, Class<T> resultClazz, String key, Long time, TimeUnit timeUnit) {
+        return assembleRedisObject(supplier, resultClazz, key, false, time, timeUnit);
+    }
+
+    /**
+     * 如果redis中存在值，那么直接将其取出，不然就是相应操作后，将其值放入缓存
+     *
+     * @param supplier    相关操作
+     * @param resultClazz 返回的类型
+     * @param key         缓存值key
+     * @param time        时间
+     * @param <T>         泛形
+     * @return
+     */
+    public <T> T assembleRedisObject(Supplier<T> supplier, Class<T> resultClazz, String key, boolean cacheNull, Long time, TimeUnit timeUnit) {
         boolean isString = String.class == resultClazz;
         // 判断是否为空
         if (StringUtils.isBlank(key)) {
             return null;
         }
+
         String value = getString(key);
+
+        // 检查是否是特殊的null标记
+        boolean isNullMarker = "_NULL_".equals(value);
+
+        // 如果缓存不存在则
         if (StringUtils.isBlank(value)) {
             T result = supplier.get();
             if (Objects.nonNull(result)) {
                 if (isString) {
-                    setString(key, (String) result, time, timeUnit);
+                    setString(key, (String)result, time, timeUnit);
                 } else {
                     setString(key, JSON.toJSONString(result), time, timeUnit);
                 }
+            } else if (cacheNull){
+                setString(key, "_NULL_", time, timeUnit);
             }
             return result;
         }
+
+        // 是否允许存储缓存
+        if (isNullMarker) {
+            return null;
+        }
+
         // 解决字符串中包含%导致json序列号失败的问题
         return isString ? (T) value : JSON.parseObject(value, resultClazz);
     }
+
+
+//    /**
+//     * 如果redis中存在值，那么直接将其取出，不然就是相应操作后，将其值放入缓存
+//     * @param supplier 相关操作
+//     * @param resultClazz 返回的类型
+//     * @param key 缓存值key
+//     * @param time 时间
+//     * @param timeUnit 时间单位 TimeUnit.SECONDS
+//     * @param <T> 泛形
+//     * @return
+//     */
+//    public <T> T assembleRedisObject(Supplier<T> supplier, Class<T> resultClazz, String key, Long time, TimeUnit timeUnit) {
+//        boolean isString = String.class == resultClazz;
+//        // 判断是否为空
+//        if (StringUtils.isBlank(key)) {
+//            return null;
+//        }
+//        String value = getString(key);
+//        if (StringUtils.isBlank(value)) {
+//            T result = supplier.get();
+//            if (Objects.nonNull(result)) {
+//                if (isString) {
+//                    setString(key, (String) result, time, timeUnit);
+//                } else {
+//                    setString(key, JSON.toJSONString(result), time, timeUnit);
+//                }
+//            }
+//            return result;
+//        }
+//        // 解决字符串中包含%导致json序列号失败的问题
+//        return isString ? (T) value : JSON.parseObject(value, resultClazz);
+//    }
 
 
     public <T> List<T> assembleRedisList(Supplier<List<T>> supplier, Class<T> resultClazz, String key, Long time) {
